@@ -1,22 +1,19 @@
 var express = require('express');
 var router = express.Router();
+const Upload = require('../Controllers/upload')
+
+const { showAllProducts } = require('../Controllers/productsController')
+const { createProduct } = require('../Controllers/productsController')
+const { updateProduct } = require('../Controllers/productsController')
+const { removeProduct } = require('../Controllers/productsController')
+
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-  });
-
-router.post('/', function(res, req, next) {
-    res.post('method post');
-})
-
-router.put('/', function(res, req, next) {
-    res.put('method put');
-})
-
-router.delete('/', function(res, req, next) {
-    res.delete('method delete');
-})
+router.get('/', showAllProducts)
+router.post('/', Upload.single('productImg'), createProduct)
+router.put('/:id', Upload.single('productImg'), updateProduct)
+router.delete('/:id', removeProduct)
+// router.delete('/',)
   
-  module.exports = router;
+module.exports = router;
   

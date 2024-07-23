@@ -4,13 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+require('./db')
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 
 var app = express();
-var cors = require('cors');
-app.use(cors());
+const { default: mongoose } = require('mongoose')
+// var cors = require('cors');
+// app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
